@@ -17,7 +17,7 @@ Trees:
 Parameters:
 	-Haploid efective population size: Fixed 800,
 	-Generation time: Fixed 1.000000e+00,
-	-Global substitution rate: LogN(-8,5.000000e-01)
+	-Global substitution rate: LogN(-9,5.000000e-01)
 	-Substitution rate heterogeneities
 		-Lineage (species) specific rate heterogeneity gamma shape: LogN(1.500000e+00,1)
 		-Gene family (locus tree) specific rate heterogeneity gamma shape: LogN(1.500000e+00,1)
