@@ -148,6 +148,76 @@ ggplot(aes(x= Condition,
   annotate(geom="text",label="b)", x = -0.4, y = 0.145, size = 5)
 ggsave("S100-bias_pc3.pdf",width=7.6,height =  3.9)
 
+ggplot(aes(x= Method,
+           y=l.est-l.true,color=Branch.Type),
+       data=s[!variants & s$Condition == "200bp" & 
+                !grepl("AVG",s$Method),])+
+  #facet_wrap(~reorder(Branch.Type,-l.true),ncol=2)+
+  geom_hline(color="grey50",linetype=1,yintercept = 0)+
+  #scale_x_continuous(trans="identity",name="True length")+
+  scale_y_continuous(name=expression("Estimated" - "True length (bias)"))+
+  #geom_violin()+
+  scale_x_discrete(labels=c("CASTLES","ERaBLE\n(mean dist)","GLASS-like\n(min dist)","Concat\n(RAxML)"))+
+  stat_summary(fun.data= median_hilow_,geom="crossbar", width=0.4,
+               position = position_dodge(width=0.75))+
+  stat_summary(fun.data = mean_sd,position = position_dodge(width=0.75))+
+  #geom_boxplot(outlier.size = 0)+
+  scale_fill_brewer(palette = "Dark2")+
+  scale_color_manual(name="",values=c("#4169E1","#DC143C"))+
+  theme_bw()+
+  coord_cartesian(ylim = c(-0.2,0.2))+
+  theme(legend.position = c(.2,.1), legend.direction = "horizontal",
+        axis.title.x = element_blank(),
+        axis.text.x = element_text(angle=0),
+        legend.box.margin = margin(0), legend.margin = margin(0))
+  ggsave("S100-bias_talk.pdf",width=6,height =  3.5)
+  
+  ggplot(aes(x= Method,
+           y=l.est-l.true,color=Branch.Type),
+       data=s[!variants & s$Condition == "200bp" & 
+                !grepl("AVG",s$Method),])+
+  #facet_wrap(~reorder(Branch.Type,-l.true),ncol=2)+
+  geom_hline(color="grey50",linetype=1,yintercept = 0)+
+  #scale_x_continuous(trans="identity",name="True length")+
+  scale_y_continuous(name=expression("Estimated" - "True length (bias)"))+
+  #geom_violin()+
+  scale_x_discrete(labels=c("CASTLES","ERaBLE\n(mean dist)","GLASS-like\n(min dist)","Concat\n(RAxML)"))+
+  stat_summary(fun.data= median_hilow_,geom="crossbar", width=0.4,
+               position = position_dodge(width=0.75))+
+  stat_summary(fun.data = mean_sd,position = position_dodge(width=0.75))+
+  #geom_boxplot(outlier.size = 0)+
+  scale_fill_brewer(palette = "Dark2")+
+  scale_color_manual(name="",values=c("#4169E1","#DC143C"))+
+  theme_bw()+
+  coord_cartesian(ylim = c(-0.2,0.2))+
+  theme(legend.position = c(.2,.1), legend.direction = "horizontal",
+        axis.title.x = element_blank(),
+        axis.text.x = element_text(angle=0),
+        legend.box.margin = margin(0), legend.margin = margin(0))
+  ggsave("S100-bias_talk.pdf",width=6,height =  3.5)
+
+
+ggplot(aes(x= Condition,group=Method,
+           y=abserr,color=Method),
+       data=s[!variants&!grepl("Pat",s$Method),])+
+  #facet_wrap(~reorder(Branch.Type,-l.true),ncol=2)+
+  facet_wrap(~cut(l.true,c(0,0.01,1.2),right=F))+
+  geom_hline(color="grey50",linetype=2,yintercept = 0)+
+  #scale_x_continuous(trans="identity",name="True length")+
+  scale_x_discrete(label=function(x) gsub(" ","\n",x,fixed=T))+
+  scale_y_continuous(name="Mean absolute error")+
+  stat_summary(fun.data = mean_se)+
+  stat_summary(fun.data = mean_se,geom="line")+
+  #geom_boxplot(outlier.size = 0)+
+  scale_fill_brewer(palette = "Dark2")+
+  scale_color_manual(name="",labels=c("CASTLES","ERaBLE (mean dist)","Concat (RAxML)"),
+                                       values =c("#2E8B57" , "#6A5ACD" , "#D2691E"))+
+  theme_bw()+
+  theme(legend.position = c(0.2,0.8), legend.direction = "vertical",
+        axis.title.x = element_blank(),
+        axis.text.x = element_text(angle=0),
+        legend.box.margin = margin(0), legend.margin = margin(0))
+ggsave("S100-abserr-talk.pdf",width=7,height =3.5)
 
 ggplot(aes(x=Condition,
            y=abserr,color=Method),
@@ -196,6 +266,8 @@ ggplot(aes(x=sub("+","\n",Method,fixed=T),
   stat_summary(fun.data = mean_sdl,position = position_dodge(width=0.5))+
   #geom_boxplot(outlier.size = 0)+
   scale_fill_brewer(palette = "Dark2")+
+  #scale_color_manual(name="",labels=c("CASTLES","ERaBLE (mean dist)","Concat (RAxML)"),
+  #                  values =c("#2E8B57" , "#6A5ACD" , "#D2691E"))+
   scale_color_brewer(palette = "Dark2",name="")+
   geom_hline(color="blue",linetype=3,yintercept = 0)+
   theme_bw()+
@@ -258,6 +330,25 @@ ggplot(aes(x=Condition,
   guides(color=guide_legend(nrow=2, byrow=TRUE))
 ggsave("quartet-error-perrep_pc3.pdf",width=7*0.9,height = 4.5*0.9)
 
+ggplot(aes(color=Condition,
+           y=log10err,x=Method),
+       data=dcast(data=q[!qvariants & q$Condition %in% c("Sp","Sp, Loc","Sp,  Loc, Sp/Loc, highILS") &
+                           !grepl("AVG", q$Method),], #&!grepl("ERaBLE", q$Method)
+                  Condition+Method+replicate~'log10err' ,value.var = "log10err",fun.aggregate = mean))+
+  scale_y_continuous(trans="identity",name="log10 error")+
+  scale_x_discrete(labels=c("CASTLES","ERaBLE\n(mean dist)","GLASS-like\n(min dist)"))+
+  #geom_boxplot(outlier.alpha = 0.3,width=0.86,outlier.size=1)+
+  stat_summary(position = position_dodge(width=0.7))+
+  stat_summary(fun.data=median_hilow_,
+               position = position_dodge(width=0.7),geom="crossbar",width=0.45)+
+  #geom_boxplot(outlier.size = 0)+
+  scale_color_manual(labels=c("Gene\nHomogeneous","Gene\nHeterogeneous","High ILS"),
+                    values=c("#800080","#B8860B","#203134"),name="")+
+  theme_bw()+
+  theme(legend.position = "bottom", legend.direction = "horizontal",
+        axis.title.x = element_blank(),
+        axis.text.x = element_text(angle=0))
+ggsave("quartet-logerr-talk.pdf",width=5,height = 3.5)
 
 ggplot(aes(x=Condition,
            y=abserr,color=Method),
@@ -372,6 +463,27 @@ ggplot(aes(color=Method, y=log10err,x=cut(AD,4)),
   geom_text(aes(color="Patristic(MIN)+FastME",y=0.6,label="Log\nError\n>2"),position = position_nudge(x  = 0.165),size=2.5)
 ggsave("MV-logerr-perrep-ILS-bymethod-nopatristic_pc3.pdf",width=6.2,height = 4)
 
+ggplot(aes(color=Method, y=log10err,x=cut(AD,c(0,25,35,50,60,70,85)/100)),
+       data=merge(
+         dcast(data=m[!mvariants & m$outgroup ==FALSE & !grepl("Pat",m$Method),],
+               outgroup+ratevar+Method+replicate~'log10err' ,
+               value.var = "log10err",fun.aggregate = function(x) mean(abs(x))),
+         dcast(data=m[!mvariants  & m$outgroup ==FALSE,], outgroup+replicate+ratevar~'AD' ,value.var = "AD",fun.aggregate = mean)))+
+  scale_y_continuous(trans="identity",name="Mean log10 error")+
+  #facet_wrap(~outgroup,ncol=2,labeller = label_both)+
+  scale_x_discrete(label=function(x) gsub("+","\n",x,fixed=T),name="True gene tree discordance (ILS)")+
+  #geom_boxplot(outlier.alpha = 0.3,width=0.8,outlier.size = 0.8)+
+  stat_summary()+
+  stat_summary(aes(group=Method),geom="line")+
+  #geom_boxplot(outlier.size = 0)+
+  scale_shape(name="",labels=c("With outgroup","No outgroup"))+
+  scale_color_manual(name="",labels=c("CASTLES","ERaBLE (mean dist)","Concat (RAxML)"),
+                     values =c("#2E8B57" , "#6A5ACD" , "#D2691E"))+
+  theme_bw()+
+  theme(legend.position =  c(.2,.8), 
+        legend.box.margin = margin(0), legend.margin = margin(0),
+        axis.text.x = element_text(angle=0,size=11))
+ggsave("MV-logerr-ILS-talk.pdf",width=6,height = 4)
 
 ggplot(aes(color=Method, y=log10err,x=cut(AD,4)),
        data=merge(
