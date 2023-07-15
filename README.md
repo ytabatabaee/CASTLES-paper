@@ -2,7 +2,7 @@
 
 This repository contains the datasets and scripts used in the following paper:
 
-- Y. Tabatabaee, C. Zhang, T. Warnow, and S. Mirarab. Phylogenomic branch length estimation using quartets. To appear in Bioinformatics (special issue for ISMB/ECCB 2023).
+- Y. Tabatabaee, C. Zhang, T. Warnow, S. Mirarab, Phylogenomic branch length estimation using quartets, Bioinformatics, Volume 39, Issue Supplement_1, June 2023, Pages i185–i193, https://doi.org/10.1093/bioinformatics/btad221
 
 For experiments in this study, we generated a new quartet dataset and regenerated species trees with substitution-unit branch lengths for previously published datasets from [Zhang et. al. (2018)](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-018-2129-y) and [Mai et. al. (2017)](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0182238). We also analyzed the mammalian biological dataset from [Song et. al. (2012)](https://www.pnas.org/doi/full/10.1073/pnas.1211733109).
 
