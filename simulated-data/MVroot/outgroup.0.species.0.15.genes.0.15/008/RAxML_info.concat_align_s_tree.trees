@@ -1,0 +1,77 @@
+
+
+Using BFGS method to optimize GTR rate parameters, to disable this specify "--no-bfgs" 
+
+
+
+This is RAxML version 8.2.12 released by Alexandros Stamatakis on May 2018.
+
+With greatly appreciated code contributions by:
+Andre Aberer      (HITS)
+Simon Berger      (HITS)
+Alexey Kozlov     (HITS)
+Kassian Kobert    (HITS)
+David Dao         (KIT and HITS)
+Sarah Lutteropp   (KIT and HITS)
+Nick Pattengale   (Sandia)
+Wayne Pfeiffer    (SDSC)
+Akifumi S. Tanabe (NRIFS)
+Charlie Taylor    (UF)
+
+
+Alignment has 42956 distinct alignment patterns
+
+Proportion of gaps and completely undetermined characters in this alignment: 0.00%
+
+RAxML Model Optimization up to an accuracy of 0.100000 log likelihood units
+
+Using 1 distinct models/data partitions with joint branch length optimization
+
+
+All free model parameters will be estimated by RAxML
+GAMMA model of rate heterogeneity, ML estimate of alpha-parameter
+
+GAMMA Model parameters will be estimated up to an accuracy of 0.1000000000 Log Likelihood units
+
+Partition: 0
+Alignment Patterns: 42956
+Name: No Name Provided
+DataType: DNA
+Substitution Matrix: GTR
+
+
+
+
+RAxML was called as follows:
+
+raxmlHPC-PTHREADS -f e -t s_tree.trees -m GTRGAMMA -s concat_align.fasta -n concat_align_s_tree.trees -p 4321 -T 16 
+
+
+
+Model parameters (binary file format) written to: /scratch/users/syt3/data/MVRoot/MVroot/outgroup.0.species.0.15.genes.0.15/008/RAxML_binaryModelParameters.concat_align_s_tree.trees
+
+
+Overall Time for Tree Evaluation 14.250557
+Final GAMMA  likelihood: -1332666.112639
+
+Number of free parameters for AIC-TEST(BR-LEN): 66
+Number of free parameters for AIC-TEST(NO-BR-LEN): 9
+
+
+Model Parameters of Partition 0, Name: No Name Provided, Type of Data: DNA
+alpha: 0.513619
+Tree-Length: 1.510923
+rate A <-> C: 0.983038
+rate A <-> G: 2.787566
+rate A <-> T: 0.647484
+rate C <-> G: 1.218421
+rate C <-> T: 2.976210
+rate G <-> T: 1.000000
+
+freq pi(A): 0.295103
+freq pi(C): 0.213738
+freq pi(G): 0.229451
+freq pi(T): 0.261708
+
+Final tree written to:                 /scratch/users/syt3/data/MVRoot/MVroot/outgroup.0.species.0.15.genes.0.15/008/RAxML_result.concat_align_s_tree.trees
+Execution Log File written to:         /scratch/users/syt3/data/MVRoot/MVroot/outgroup.0.species.0.15.genes.0.15/008/RAxML_log.concat_align_s_tree.trees
