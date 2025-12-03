@@ -6,7 +6,7 @@ This repository contains the datasets used in the following paper:
 
 For experiments in this study, we studied a collection of simulated and biological datasets with incomplete lineage sorting (ILS). We generated a new quartet dataset and regenerated species trees with substitution-unit branch lengths for previously published datasets from [Zhang et. al. (2018)](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-018-2129-y) and [Mai et. al. (2017)](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0182238). We also analyzed the mammalian biological dataset from [Song et. al. (2012)](https://www.pnas.org/doi/full/10.1073/pnas.1211733109).
 
-All datasets can be accessed from [this](https://drive.google.com/drive/folders/1Crzn_H-8m9WWr8WuZ_E2DQx0Cx2QXQJF?usp=share_link) Google Drive link.
+All datasets can be accessed from Dryad https://doi.org/10.5061/dryad.pg4f4qs3q.
 
 ### Simulated datasets
 
